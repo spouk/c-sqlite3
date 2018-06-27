@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.11)
+project(sqlite3example)
+LIST (APPEND CMAKE_INCLUDE_PATH "/usr/include")
+LIST (APPEND CMAKE_LIBRARY_PATH "/usr/lib")
+link_libraries(sqlite3)
+set(SOURCE_FILES sqlite3example.c)
+add_executable(sqlite3example ${SOURCE_FILES})
