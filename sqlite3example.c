@@ -5,6 +5,7 @@
 #include <sqlite3.h>
 
 int opendbs(char *dbsname, sqlite3 *handler);
+
 void catcherErrorSqlite3(int errorSqlite);
 
 int main() {
@@ -65,31 +66,78 @@ void catcherErrorSqlite3(int errorSqlite) {
         case SQLITE_NOMEM:
             fprintf(stderr, "%s", "A malloc() failed");
             break;
+        case SQLITE_READONLY:     /* Attempt to write a readonly database */
+            fprintf(stderr, "%s", " Attempt to write a readonly database ");
+            break;
+        case SQLITE_INTERRUPT :      /* Operation terminated by sqlite3_interrupt()*/
+            fprintf(stderr, "%s", " Operation terminated by sqlite3_interrupt()");
+            break;
+        case SQLITE_IOERR      :   /* Some kind of disk I/O error occurred */
+            fprintf(stderr, "%s", " Some kind of disk I/O error occurred ");
+            break;
+        case SQLITE_CORRUPT    : /* The database disk image is malformed */
+            fprintf(stderr, "%s", " The database disk image is malformed ");
+            break;
+        case SQLITE_NOTFOUND    :/* Unknown opcode in sqlite3_file_control() */
+            fprintf(stderr, "%s", " Unknown opcode in sqlite3_file_control() ");
+            break;
+        case SQLITE_FULL       : /* Insertion failed because database is full */
+            fprintf(stderr, "%s", " Insertion failed because database is full ");
+            break;
+        case SQLITE_CANTOPEN   :   /* Unable to open the database file */
+            fprintf(stderr, "%s", " Unable to open the database file ");
+            break;
+        case SQLITE_PROTOCOL    :/* Database lock protocol error */
+            fprintf(stderr, "%s", " Database lock protocol error ");
+            break;
+        case SQLITE_EMPTY       :  /* Internal use only */
+            fprintf(stderr, "%s", " Internal use only ");
+            break;
+        case SQLITE_SCHEMA      : /* The database schema changed */
+            fprintf(stderr, "%s", " The database schema changed ");
+            break;
+        case SQLITE_TOOBIG      :  /* String or BLOB exceeds size limit */
+            fprintf(stderr, "%s", " String or BLOB exceeds size limit ");
+            break;
+        case SQLITE_CONSTRAINT  :  /* Abort due to constraint violation */
+            fprintf(stderr, "%s", " Abort due to constraint violation ");
+            break;
+        case SQLITE_MISMATCH    :   /* Data type mismatch */
+            fprintf(stderr, "%s", " Data type mismatch ");
+            break;
+        case SQLITE_MISUSE      :   /* Library used incorrectly */
+            fprintf(stderr, "%s", " Library used incorrectly ");
+            break;
+        case SQLITE_NOLFS       :   /* Uses OS features not supported on host */
+            fprintf(stderr, "%s", " Uses OS features not supported on host ");
+            break;
+        case SQLITE_AUTH        :  /* Authorization denied */
+            fprintf(stderr, "%s", " Authorization denied ");
+            break;
+        case SQLITE_FORMAT      :  /* Not used */
+            fprintf(stderr, "%s", " Not used ");
+            break;
+        case SQLITE_RANGE       :  /* 2nd parameter to sqlite3_bind out of range */
+            fprintf(stderr, "%s", " 2nd parameter to sqlite3_bind out of range ");
+            break;
+        case SQLITE_NOTADB      :   /* File opened that is not a database file */
+            fprintf(stderr, "%s", " File opened that is not a database file ");
+            break;
+        case SQLITE_NOTICE      :   /* Notifications from sqlite3_log() */
+            fprintf(stderr, "%s", " Notifications from sqlite3_log() ");
+            break;
+        case SQLITE_WARNING     :   /* Warnings from sqlite3_log() */
+            fprintf(stderr, "%s", " Warnings from sqlite3_log() ");
+            break;
+        case SQLITE_ROW         :  /* sqlite3_step() has another row ready */
+            fprintf(stderr, "%s", " sqlite3_step() has another row ready ");
+            break;
+        case SQLITE_DONE        :  /* sqlite3_step() has finished executing */
+            fprintf(stderr, "%s", " sqlite3_step() has finished executing ");
+            break;
     }
 }
 
 
-//#define SQLITE_READONLY     8   /* Attempt to write a readonly database */
-//#define SQLITE_INTERRUPT    9   /* Operation terminated by sqlite3_interrupt()*/
-//#define SQLITE_IOERR       10   /* Some kind of disk I/O error occurred */
-//#define SQLITE_CORRUPT     11   /* The database disk image is malformed */
-//#define SQLITE_NOTFOUND    12   /* Unknown opcode in sqlite3_file_control() */
-//#define SQLITE_FULL        13   /* Insertion failed because database is full */
-//#define SQLITE_CANTOPEN    14   /* Unable to open the database file */
-//#define SQLITE_PROTOCOL    15   /* Database lock protocol error */
-//#define SQLITE_EMPTY       16   /* Internal use only */
-//#define SQLITE_SCHEMA      17   /* The database schema changed */
-//#define SQLITE_TOOBIG      18   /* String or BLOB exceeds size limit */
-//#define SQLITE_CONSTRAINT  19   /* Abort due to constraint violation */
-//#define SQLITE_MISMATCH    20   /* Data type mismatch */
-//#define SQLITE_MISUSE      21   /* Library used incorrectly */
-//#define SQLITE_NOLFS       22   /* Uses OS features not supported on host */
-//#define SQLITE_AUTH        23   /* Authorization denied */
-//#define SQLITE_FORMAT      24   /* Not used */
-//#define SQLITE_RANGE       25   /* 2nd parameter to sqlite3_bind out of range */
-//#define SQLITE_NOTADB      26   /* File opened that is not a database file */
-//#define SQLITE_NOTICE      27   /* Notifications from sqlite3_log() */
-//#define SQLITE_WARNING     28   /* Warnings from sqlite3_log() */
-//#define SQLITE_ROW         100  /* sqlite3_step() has another row ready */
-//#define SQLITE_DONE        101  /* sqlite3_step() has finished executing */
+
 
